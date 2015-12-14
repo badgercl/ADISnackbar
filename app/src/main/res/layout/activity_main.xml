@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="cl.uchile.ing.adi.adisnackbar.MainActivity">
+
+        <Button
+            android:id="@+id/button_success"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:onClick="onSuccessMsg"
+            android:layout_alignParentTop="true"
+            android:gravity="center_horizontal|top"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/success"/>
+
+        <Button
+            android:id="@+id/button_normal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_below="@id/button_success"
+            android:onClick="onDefaultMsg"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/normal"/>
+
+        <Button
+            android:id="@+id/button_warning"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_below="@id/button_normal"
+            android:onClick="onWarningMsg"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/warning"/>
+
+        <Button
+            android:id="@+id/button_error"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_below="@id/button_warning"
+            android:onClick="onErrorMsg"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/error"/>
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:src="@android:drawable/ic_dialog_alert"
+        />
+
+</android.support.design.widget.CoordinatorLayout>

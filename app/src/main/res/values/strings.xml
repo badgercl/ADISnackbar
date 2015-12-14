@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ADISnackbar</string>
+    <string name="success">Success message</string>
+    <string name="normal">Default message</string>
+    <string name="warning">Warning message</string>
+    <string name="error">Error message</string>
+</resources>
