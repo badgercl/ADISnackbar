@@ -8,10 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
 
-enum ADISnackbarType{
-    DEFAULT, SUCCESS, WARNING, ERROR;
-}
-
 /**
  * ADISnackbar eases the creation of customized Android Snackbars.
  */
@@ -24,7 +20,7 @@ public class ADISnackbar {
      * @param type Type of message to show
      * @param view The view to start the CoordinatorLayout or FrameLayout where to show the snackbar
      */
-    public static void snackbar(Context context, int message, ADISnackbarType type, View view){
+    public static void snackbar(Context context, int message, Type type, View view){
         if(context == null) return;
         snackbar(context.getString(message), type, view, context);
     }
@@ -40,7 +36,7 @@ public class ADISnackbar {
      * </ul>
      *
      * When the special char is present, it's removed from the shown message and the snackbar is formatted accordingly
-     * When no special char is present, the message is shown and the type is @{@link ADISnackbarType#DEFAULT}
+     * When no special char is present, the message is shown and the type is @{@link Type#DEFAULT}
      *
      * @param formattedString The formatted string
      * @param view The view to start the CoordinatorLayout or FrameLayout where to show the snackbar
@@ -48,23 +44,23 @@ public class ADISnackbar {
      */
     public static void snackbar(String formattedString, View view, Context context){
         if(TextUtils.isEmpty(formattedString)) return;
-        ADISnackbarType type;
+        Type type;
         char typeChar = formattedString.charAt(0);
         switch (typeChar){
             case '+':
-                type = ADISnackbarType.SUCCESS;
+                type = Type.SUCCESS;
                 formattedString = formattedString.substring(1);
                 break;
             case '-':
-                type = ADISnackbarType.ERROR;
+                type = Type.ERROR;
                 formattedString = formattedString.substring(1);
                 break;
             case '!':
-                type = ADISnackbarType.WARNING;
+                type = Type.WARNING;
                 formattedString = formattedString.substring(1);
                 break;
             default:
-                type = ADISnackbarType.DEFAULT;
+                type = Type.DEFAULT;
                 break;
         }
         snackbar(formattedString,type,view,context);
@@ -78,7 +74,7 @@ public class ADISnackbar {
      * @param view The view to start the CoordinatorLayout or FrameLayout where to show the snackbar
      * @param context The application's context
      */
-    public static void snackbar(String message, ADISnackbarType type, View view, Context context){
+    public static void snackbar(String message, Type type, View view, Context context){
         int duration = message.length() > 100 ? Snackbar.LENGTH_LONG : Snackbar.LENGTH_SHORT;
         final Snackbar snackbar = Snackbar.make(view, message, duration);
 
@@ -109,5 +105,11 @@ public class ADISnackbar {
                 }
             });
         else snackbar.show();
+    }
+
+
+
+    public enum Type {
+        DEFAULT, SUCCESS, WARNING, ERROR;
     }
 }
