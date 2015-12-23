@@ -1,7 +1,7 @@
 # ADISnackbar
 Nicer Snackbars 
 
-We'll be adding more functionality as we need it in out project ;)
+We'll be adding more functionality as we need it in our project ;)
 
 
 ## Install
