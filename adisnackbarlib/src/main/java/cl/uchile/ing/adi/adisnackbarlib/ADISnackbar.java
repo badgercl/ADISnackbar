@@ -20,7 +20,7 @@ public class ADISnackbar {
      * @param type Type of message to show
      * @param view The view to start the CoordinatorLayout or FrameLayout where to show the snackbar
      */
-    public static void snackbar(Context context, int message, Type type, View view){
+    public static void snackbar(int message, Type type, View view, Context context){
         if(context == null) return;
         snackbar(context.getString(message), type, view, context);
     }
