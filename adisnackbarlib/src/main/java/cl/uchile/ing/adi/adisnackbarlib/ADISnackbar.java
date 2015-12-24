@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -23,6 +24,31 @@ public class ADISnackbar {
     public static void snackbar(int message, Type type, View view, Context context){
         if(context == null) return;
         snackbar(context.getString(message), type, view, context);
+    }
+
+
+    /**
+     *
+     *  Shows a Snackbar
+     *
+     * @param message The message id to show
+     * @param type Type of message to show
+     * @param fragment The fragment where the snackbar will be shown
+     */
+    public static void snackbar(int message, Type type, Fragment fragment){
+        snackbar(message, type, fragment.getView(), fragment.getContext());
+    }
+
+    /**
+     *
+     *  Shows a Snackbar
+     *
+     * @param message The message to show
+     * @param type Type of message to show
+     * @param fragment The fragment where the snackbar will be shown
+     */
+    public static void snackbar(String message, Type type, Fragment fragment){
+        snackbar(message, type, fragment.getView(), fragment.getContext());
     }
 
     /**
