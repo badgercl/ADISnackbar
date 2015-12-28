@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * ADISnackbar eases the creation of customized Android Snackbars.
@@ -105,25 +106,41 @@ public class ADISnackbar {
         final Snackbar snackbar = Snackbar.make(view, message, duration);
 
         View snackview = snackbar.getView();
-        int color;
+        int backgroundColorR = 0;
+        int textColorR = 0;
         switch(type){
             case SUCCESS:
-                color = R.color.success;
+                backgroundColorR = R.color.adisnackbar_success;
+                textColorR = R.color.adisnackbar_text_dark;
                 break;
             case WARNING:
-                color = R.color.warning;
+                backgroundColorR = R.color.adisnackbar_warning;
+                textColorR = R.color.adisnackbar_text_dark;
                 break;
             case ERROR:
-                color = R.color.error;
+                backgroundColorR = R.color.adisnackbar_error;
+                textColorR = R.color.adisnackbar_text_light;
                 break;
             case DEFAULT:
             default:
-                color = R.color.normal;
                 break;
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) snackview.setBackgroundColor(context.getResources().getColor(color, null));
-        else //noinspection deprecation
-            snackview.setBackgroundColor(context.getResources().getColor(color));
+        if(!(backgroundColorR == 0 || textColorR == 0)) {
+            int backgroundColor;
+            int textColor;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                textColor = context.getResources().getColor(textColorR, null);
+                backgroundColor = context.getResources().getColor(backgroundColorR, null);
+            } else {
+                //noinspection deprecation
+                textColor = context.getResources().getColor(textColorR);
+                //noinspection deprecation
+                backgroundColor = context.getResources().getColor(backgroundColorR);
+            }
+            TextView tv = (TextView) snackview.findViewById(R.id.snackbar_text);
+            tv.setTextColor(textColor);
+            snackview.setBackgroundColor(backgroundColor);
+        }
         if (Looper.myLooper() != Looper.getMainLooper())
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override public void run() {

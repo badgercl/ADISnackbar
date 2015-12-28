@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="success">#64dd17</color>
-    <color name="normal">#304ffe</color>
-    <color name="warning">#ffea00</color>
-    <color name="error">#d50000</color>
+    <color name="adisnackbar_success">#81c784</color>
+    <color name="adisnackbar_normal">#01579b</color>
+    <color name="adisnackbar_warning">#ffea00</color>
+    <color name="adisnackbar_error">#d50000</color>
+    <color name="adisnackbar_text_dark">#000000</color>
+    <color name="adisnackbar_text_light">#fafafa</color>
 </resources>
