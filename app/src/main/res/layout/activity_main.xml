@@ -53,6 +53,17 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="@string/error"/>
+
+        <Button
+            android:id="@+id/button_manycalls"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_below="@id/button_error"
+            android:onClick="onCallMany"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/manycalls"
+            />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

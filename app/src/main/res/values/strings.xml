@@ -4,4 +4,5 @@
     <string name="normal">Default message</string>
     <string name="warning">Warning message</string>
     <string name="error">Error message</string>
+    <string name="manycalls">Many messages</string>
 </resources>

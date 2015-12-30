@@ -10,10 +10,22 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
  * ADISnackbar eases the creation of customized Android Snackbars.
  */
-public class ADISnackbar {
+public class ADISnackbar{
+
+    /**
+     * Type of Snackbars
+     */
+    public enum Type {
+        DEFAULT, SUCCESS, WARNING, ERROR;
+    }
+
     /**
      * Shows a Snackbar
      *
@@ -123,57 +135,84 @@ public class ADISnackbar {
      * @param context The application's context
      */
     public static void snackbar(String message, Type type, View view, Context context){
-        int duration = message.length() > 100 ? Snackbar.LENGTH_LONG : Snackbar.LENGTH_SHORT;
-        final Snackbar snackbar = Snackbar.make(view, message, duration);
-
-        View snackview = snackbar.getView();
-        int backgroundColorR = 0;
-        int textColorR = 0;
-        switch(type){
-            case SUCCESS:
-                backgroundColorR = R.color.adisnackbar_success;
-                textColorR = R.color.adisnackbar_text_dark;
-                break;
-            case WARNING:
-                backgroundColorR = R.color.adisnackbar_warning;
-                textColorR = R.color.adisnackbar_text_dark;
-                break;
-            case ERROR:
-                backgroundColorR = R.color.adisnackbar_error;
-                textColorR = R.color.adisnackbar_text_light;
-                break;
-            case DEFAULT:
-            default:
-                break;
-        }
-        if(!(backgroundColorR == 0 || textColorR == 0)) {
-            int backgroundColor;
-            int textColor;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                textColor = context.getResources().getColor(textColorR, null);
-                backgroundColor = context.getResources().getColor(backgroundColorR, null);
-            } else {
-                //noinspection deprecation
-                textColor = context.getResources().getColor(textColorR);
-                //noinspection deprecation
-                backgroundColor = context.getResources().getColor(backgroundColorR);
-            }
-            TextView tv = (TextView) snackview.findViewById(R.id.snackbar_text);
-            tv.setTextColor(textColor);
-            snackview.setBackgroundColor(backgroundColor);
-        }
-        if (Looper.myLooper() != Looper.getMainLooper())
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override public void run() {
-                    snackbar.show();
-                }
-            });
-        else snackbar.show();
+        getInstance().internalSnackbar(message, type, view, context);
     }
 
+    private Queue<Runnable> queue;
+    private boolean isSnackbarShowing;
+    private Snackbar.Callback callback;
+    private static ADISnackbar INSTANCE;
+    private static ADISnackbar getInstance(){
+        if(INSTANCE==null) INSTANCE = new ADISnackbar();
+        return INSTANCE;
+    }
+    private ADISnackbar(){
+        isSnackbarShowing = false;
+        queue = new LinkedList<>();
+        callback = new Snackbar.Callback(){
+            public void onDismissed(Snackbar snackbar, @DismissEvent int event) {
+                if(queue.size()>0) runOnMainThread(queue.remove());
+                else isSnackbarShowing = false;
+            }
+        };
+    }
+    private void runOnMainThread(Runnable r){
+        if(Looper.myLooper() != Looper.getMainLooper()) new Handler(Looper.getMainLooper()).post(r);
+        else r.run();
+    }
+    private void internalSnackbar(final String message, final Type type, final View view, final Context context){
+        Runnable runnable = new Runnable() {
+            @Override public void run() {
+                int duration = message.length() > 100 ? Snackbar.LENGTH_LONG : Snackbar.LENGTH_SHORT;
+                final Snackbar snackbar = Snackbar.make(view, message, duration);
+                snackbar.setCallback(callback);
 
+                View snackview = snackbar.getView();
+                int backgroundColorR = 0;
+                int textColorR = 0;
+                switch(type){
+                    case SUCCESS:
+                        backgroundColorR = R.color.adisnackbar_success;
+                        textColorR = R.color.adisnackbar_text_dark;
+                        break;
+                    case WARNING:
+                        backgroundColorR = R.color.adisnackbar_warning;
+                        textColorR = R.color.adisnackbar_text_dark;
+                        break;
+                    case ERROR:
+                        backgroundColorR = R.color.adisnackbar_error;
+                        textColorR = R.color.adisnackbar_text_light;
+                        break;
+                    case DEFAULT:
+                    default:
+                        break;
+                }
+                if(!(backgroundColorR == 0 || textColorR == 0)) {
+                    int backgroundColor;
+                    int textColor;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        textColor = context.getResources().getColor(textColorR, null);
+                        backgroundColor = context.getResources().getColor(backgroundColorR, null);
+                    } else {
+                        //noinspection deprecation
+                        textColor = context.getResources().getColor(textColorR);
+                        //noinspection deprecation
+                        backgroundColor = context.getResources().getColor(backgroundColorR);
+                    }
+                    TextView tv = (TextView) snackview.findViewById(R.id.snackbar_text);
+                    tv.setTextColor(textColor);
+                    snackview.setBackgroundColor(backgroundColor);
+                }
+                snackbar.show();
+            }
+        };
 
-    public enum Type {
-        DEFAULT, SUCCESS, WARNING, ERROR;
+        synchronized (this){
+            if(isSnackbarShowing) queue.add(runnable);
+            else {
+                isSnackbarShowing = true;
+                runOnMainThread(runnable);
+            }
+        }
     }
 }

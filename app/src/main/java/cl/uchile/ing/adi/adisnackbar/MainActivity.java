@@ -26,4 +26,13 @@ public class MainActivity extends AppCompatActivity {
     public void onErrorMsg(View v){
         ADISnackbar.snackbar("-this is a failure messsage", v, getApplicationContext());
     }
+    public void onCallMany(View v){
+        char[] symbols = new char[3];
+        symbols[0] = '+';
+        symbols[1] = '-';
+        symbols[2] = '!';
+        for(int i=0;i<5;i++){
+            ADISnackbar.snackbar(String.format("%c Prueba %d", symbols[i%symbols.length], i), v, getApplicationContext());
+        }
+    }
 }
