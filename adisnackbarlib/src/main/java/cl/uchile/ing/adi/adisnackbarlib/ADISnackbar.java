@@ -66,6 +66,27 @@ public class ADISnackbar {
      * When no special char is present, the message is shown and the type is @{@link Type#DEFAULT}
      *
      * @param formattedString The formatted string
+     * @param fragment The fragment where the snackbar will be shown
+
+     */
+    public static void snackbar(String formattedString, Fragment fragment){
+        snackbar(formattedString, fragment.getView(), fragment.getContext());
+    }
+
+    /**
+     * Shows a Snackbar from a formatted message.
+     *
+     * The message can be formatted by adding a special character at the beginning of the text:
+     * <ul>
+     * <li>'+' success message</li>
+     * <li> '-' error message</li>
+     * <li> '!' warning message</li>
+     * </ul>
+     *
+     * When the special char is present, it's removed from the shown message and the snackbar is formatted accordingly
+     * When no special char is present, the message is shown and the type is @{@link Type#DEFAULT}
+     *
+     * @param formattedString The formatted string
      * @param view The view to start the CoordinatorLayout or FrameLayout where to show the snackbar
      * @param context The application's context
      */
