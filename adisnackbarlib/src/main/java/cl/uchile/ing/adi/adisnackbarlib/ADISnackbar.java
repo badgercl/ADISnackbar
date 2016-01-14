@@ -23,7 +23,7 @@ public class ADISnackbar{
      * Type of Snackbars
      */
     public enum Type {
-        DEFAULT, SUCCESS, WARNING, ERROR;
+        DEFAULT, NORMAL, SUCCESS, WARNING, ERROR;
     }
 
     /**
@@ -90,9 +90,10 @@ public class ADISnackbar{
      *
      * The message can be formatted by adding a special character at the beginning of the text:
      * <ul>
-     * <li>'+' success message</li>
+     * <li> '+' success message</li>
      * <li> '-' error message</li>
-     * <li> '!' warning message</li>
+     * <li> '*' success message</li>
+     * <li> '' (no special char) warning message</li>
      * </ul>
      *
      * When the special char is present, it's removed from the shown message and the snackbar is formatted accordingly
@@ -115,12 +116,12 @@ public class ADISnackbar{
                 type = Type.ERROR;
                 formattedString = formattedString.substring(1);
                 break;
-            case '!':
-                type = Type.WARNING;
+            case '*':
+                type = Type.NORMAL;
                 formattedString = formattedString.substring(1);
                 break;
             default:
-                type = Type.DEFAULT;
+                type = Type.WARNING;
                 break;
         }
         snackbar(formattedString,type,view,context);
@@ -172,16 +173,20 @@ public class ADISnackbar{
                 int textColorR = 0;
                 switch(type){
                     case SUCCESS:
-                        backgroundColorR = R.color.adisnackbar_success;
-                        textColorR = R.color.adisnackbar_text_dark;
+                        backgroundColorR = R.color.adisnackbar_success_text;
+                        textColorR = R.color.adisnackbar_success;
                         break;
                     case WARNING:
-                        backgroundColorR = R.color.adisnackbar_warning;
-                        textColorR = R.color.adisnackbar_text_dark;
+                        backgroundColorR = R.color.adisnackbar_warning_text;
+                        textColorR = R.color.adisnackbar_warning;
                         break;
                     case ERROR:
                         backgroundColorR = R.color.adisnackbar_error;
-                        textColorR = R.color.adisnackbar_text_light;
+                        textColorR = R.color.adisnackbar_error_text;
+                        break;
+                    case NORMAL:
+                        backgroundColorR = R.color.adisnackbar_normal_text;
+                        textColorR = R.color.adisnackbar_normal;
                         break;
                     case DEFAULT:
                     default:

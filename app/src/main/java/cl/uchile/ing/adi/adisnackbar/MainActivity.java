@@ -15,22 +15,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSuccessMsg(View v){
-        ADISnackbar.snackbar("+this is a success messsage", v, getApplicationContext());
+        ADISnackbar.snackbar("this is a success messsage", ADISnackbar.Type.SUCCESS, v, getApplicationContext());
     }
     public void onDefaultMsg(View v){
-        ADISnackbar.snackbar("this is a normal messsage", v, getApplicationContext());
+        ADISnackbar.snackbar("this is a normal messsage", ADISnackbar.Type.NORMAL, v, getApplicationContext());
     }
     public void onWarningMsg(View v){
-        ADISnackbar.snackbar("!this is a warning message", v, getApplicationContext());
+        ADISnackbar.snackbar("this is a warning message", ADISnackbar.Type.WARNING, v, getApplicationContext());
     }
     public void onErrorMsg(View v){
-        ADISnackbar.snackbar("-this is a failure messsage", v, getApplicationContext());
+        ADISnackbar.snackbar("this is a failure messsage", ADISnackbar.Type.ERROR, v, getApplicationContext());
     }
     public void onCallMany(View v){
-        char[] symbols = new char[3];
+        char[] symbols = new char[4];
         symbols[0] = '+';
         symbols[1] = '-';
-        symbols[2] = '!';
+        symbols[2] = '*';
+        symbols[3] = ' ';
         for(int i=0;i<5;i++){
             ADISnackbar.snackbar(String.format("%c Prueba %d", symbols[i%symbols.length], i), v, getApplicationContext());
         }
