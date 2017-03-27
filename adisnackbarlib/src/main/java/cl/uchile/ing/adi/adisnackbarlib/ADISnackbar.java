@@ -162,6 +162,7 @@ public class ADISnackbar{
         else r.run();
     }
     private void internalSnackbar(final String message, final Type type, final View view, final Context context){
+        if(TextUtils.isEmpty(message) || type == null || view == null || context == null) return;
         Runnable runnable = new Runnable() {
             @Override public void run() {
                 int duration = message.length() > 100 ? Snackbar.LENGTH_LONG : Snackbar.LENGTH_SHORT;
