@@ -1,25 +1,22 @@
 # ADISnackbar
-Nicer Snackbars 
+Snackbars to allow showing modern-looking messages than Toast. Unfortunately if you want to add some styling you need to use several lines of aditional code. We provide a simple library to show coloured snackbars with a simple methods calls.
 
-We'll be adding more functionality as we need it in our project ;)
+# Usage
 
+There are several methods you can use, there are all documented in the ADISnackbar.java class.
 
-## Install
+There two main ways to show a Snackbar:
 
-Add it in your root build.gradle at the end of repositories:
+Using a formatted text using the chars '+', '-', '*' to modify the colours.
 
-```gradle
-	allprojects {
-		repositories {
-			...
-			maven { url "https://jitpack.io" }
-		}
-	}
+```
+ADISnackbar.snackbar("+hello world", fragment);
 ```
 
-Add the dependency
-```gradle
-	dependencies {
-	        compile 'com.github.badgercl:ADISnackbar:v0.1'
-	}
+Or you can explicitly define the type of message as argument:
+
 ```
+ADISnackbar.snackbar("this is a failure messsage", ADISnackbar.Type.ERROR, v, getApplicationContext());
+```
+
+You can check the demo app included in this repo for running examples.
