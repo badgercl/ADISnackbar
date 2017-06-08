@@ -158,6 +158,7 @@ public class ADISnackbar{
         };
     }
     private void runOnMainThread(Runnable r){
+        if(r==null) return;
         if(Looper.myLooper() != Looper.getMainLooper()) new Handler(Looper.getMainLooper()).post(r);
         else r.run();
     }
