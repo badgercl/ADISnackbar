@@ -167,9 +167,14 @@ public class ADISnackbar{
         Runnable runnable = new Runnable() {
             @Override public void run() {
                 int duration = message.length() > 100 ? Snackbar.LENGTH_LONG : Snackbar.LENGTH_SHORT;
-                final Snackbar snackbar = Snackbar.make(view, message, duration);
+                Snackbar tmpbar;
+                try {
+                    tmpbar = Snackbar.make(view, message, duration);
+                }catch(Exception e){
+                    return;
+                }
+                final Snackbar snackbar = tmpbar;
                 snackbar.setCallback(callback);
-
                 View snackview = snackbar.getView();
                 int backgroundColorR = 0;
                 int textColorR = 0;
