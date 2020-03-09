@@ -4,14 +4,13 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 /**
