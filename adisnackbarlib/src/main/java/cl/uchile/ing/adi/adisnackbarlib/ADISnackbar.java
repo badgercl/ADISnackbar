@@ -179,20 +179,20 @@ public class ADISnackbar{
                 int textColorR = 0;
                 switch(type){
                     case SUCCESS:
-                        backgroundColorR = R.color.adisnackbar_success_text;
-                        textColorR = R.color.adisnackbar_success;
+                        backgroundColorR = R.color.adisnackbar_success;
+                        textColorR = R.color.adisnackbar_success_text;
                         break;
                     case WARNING:
-                        backgroundColorR = R.color.adisnackbar_warning_text;
-                        textColorR = R.color.adisnackbar_warning;
+                        backgroundColorR = R.color.adisnackbar_warning;
+                        textColorR = R.color.adisnackbar_warning_text;
                         break;
                     case ERROR:
                         backgroundColorR = R.color.adisnackbar_error;
                         textColorR = R.color.adisnackbar_error_text;
                         break;
                     case NORMAL:
-                        backgroundColorR = R.color.adisnackbar_normal_text;
-                        textColorR = R.color.adisnackbar_normal;
+                        backgroundColorR = R.color.adisnackbar_normal;
+                        textColorR = R.color.adisnackbar_normal_text;
                         break;
                     case DEFAULT:
                     default:

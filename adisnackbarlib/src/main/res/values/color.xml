@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="adisnackbar_success">#edf9e1</color>
-    <color name="adisnackbar_success_text">#339900</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
-    <color name="adisnackbar_normal">#edf9e1</color>
-    <color name="adisnackbar_normal_text">#01579b</color>
+    <color name="adisnackbar_success">#59BF79</color>
+    <color name="adisnackbar_success_text">@color/white</color>
 
-    <color name="adisnackbar_warning">#fffae6</color>
-    <color name="adisnackbar_warning_text">#f87f08</color>
+    <color name="adisnackbar_normal">#54CCE6</color>
+    <color name="adisnackbar_normal_text">@color/white</color>
 
-    <color name="adisnackbar_error">#ff0000</color>
-    <color name="adisnackbar_error_text">#ffe6e6</color>
+    <color name="adisnackbar_warning">#FFB436</color>
+    <color name="adisnackbar_warning_text">@color/white</color>
+
+    <color name="adisnackbar_error">#E6624B</color>
+    <color name="adisnackbar_error_text">@color/white</color>
 
 </resources>
